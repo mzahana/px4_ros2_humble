@@ -72,6 +72,18 @@ RUN colcon mixin add default \
 # 	&& cmake --build . --target install -- -j $(nproc) \
 # 	&& rm -rf /tmp/*
 
+#
+# Setup XRCE-DDS Agent & Client
+#
+RUN git clone https://github.com/eProsima/Micro-XRCE-DDS-Agent.git && \
+    cd Micro-XRCE-DDS-Agent && \
+    mkdir build && \
+    cd build
+    cmake .. && \
+    make && \
+    sudo make install && \
+    sudo ldconfig /usr/local/lib/
+
 # create and start as LOCAL_USER_ID
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

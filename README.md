@@ -19,3 +19,19 @@ Source files and workspaces are saved inside a shared volume. The path to the sh
 
 # Install PX4
 It's recommended to have the PX4-Autopilot src and the ros 2 workspace inside the shared volume, so you don't loose them if the container is removed.
+
+* Enter the container `./docker_run.sh`
+* Go to the shared volume `cd /home/user/shared_volume`
+* Clone the `PX4-Autopilot` source 
+    ```bash
+    git clone https://github.com/PX4/PX4-Autopilot.git --recursive
+    ```
+* Enter the `PX4-Autopilot` directory (inside the ), clean, and build the source code
+```bash
+cd PX4-Autopilot
+make clean
+make distclean
+git fetch origin release/1.13.2
+git checkout release/1.13.2
+make submodulesclean
+```

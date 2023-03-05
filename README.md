@@ -13,6 +13,11 @@ This builds a Docker image that has the required PX4 development environment, an
 The Gazebo version in the provided Docker image is Gazebo Garden.
 
 # Run
+If you have NVIDIA GPU, run
+```bash
+./docker_run_nvidia.sh
+```
+Otherwise, run
 ```bash
 ./docker_run.sh
 ```

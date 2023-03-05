@@ -21,12 +21,12 @@
 # fi
 
 if [ -z "$CATKIN_WS" ]; then
-	CATKIN_WS=\$HOME/shared_volume/catkin_ws
+	CATKIN_WS=/home/user/shared_volume/catkin_ws
 fi
 echo "path to catkin_ws is defined at $CATKIN_WS" && echo
 
 if [ -z "$PX4_ROOT" ]; then
-	PX4_ROOT=\$HOME/shared_volume
+	PX4_ROOT=/home/user/shared_volume
 
 fi
 echo "path to catkin_ws is defined at $CATKIN_WS" && echo
@@ -153,7 +153,7 @@ else
         --env="DISPLAY=$DISPLAY" \
         --env="QT_X11_NO_MITSHM=1" \
         -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
-        --volume="$WORKSPACE_DIR:/home/user:rw" \
+        --volume="$WORKSPACE_DIR:/home/user/shared_volume:rw" \
         --volume="/dev/input:/dev/input" \
         --volume="$XAUTH:$XAUTH" \
         -env="XAUTHORITY=$XAUTH" \

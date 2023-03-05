@@ -37,6 +37,22 @@ WORKSPACE_DIR=~/${CONTAINER_NAME}_shared_volume
 CMD=""
 DOCKER_OPTS=""
 
+# Get the current version of docker-ce
+# Strip leading stuff before the version number so it can be compared
+DOCKER_VER=$(dpkg-query -f='${Version}' --show docker-ce | sed 's/[0-9]://')
+if dpkg --compare-versions 19.03 gt "$DOCKER_VER"
+then
+    echo "Docker version is less than 19.03, using nvidia-docker2 runtime"
+    if ! dpkg --list | grep nvidia-docker2
+    then
+        echo "Please either update docker-ce to a version greater than 19.03 or install nvidia-docker2"
+	exit 1
+    fi
+    DOCKER_OPTS="$DOCKER_OPTS --runtime=nvidia"
+else
+    DOCKER_OPTS="$DOCKER_OPTS --gpus all"
+fi
+echo "GPU arguments: $DOCKER_OPTS"
 
 # This will enable running containers with different names
 # It will create a local workspace and link it to the image's catkin_ws
@@ -76,6 +92,9 @@ fi
 
 
 echo "Shared WORKSPACE_DIR: $WORKSPACE_DIR";
+
+#not-recommended - T.T please fix me, check this: http://wiki.ros.org/docker/Tutorials/GUI
+xhost +local:root
  
 echo "Starting Container: ${CONTAINER_NAME} with REPO: $DOCKER_REPO"
 
@@ -141,6 +160,7 @@ else
         --publish 14556:14556/udp \
         --name=${CONTAINER_NAME} \
         --privileged \
+        $DOCKER_OPTS \
         ${DOCKER_REPO} \
         bash -c "${CMD}"
 fi

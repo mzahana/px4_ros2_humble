@@ -52,7 +52,8 @@ RUN pip3 install -U \
 		pytest-rerunfailures
 
 # bootstrap rosdep
-RUN rosdep update
+# RUN sudo rosdep fix-permissions && sudo rosdep init && rosdep update
+RUN rosdep init && rosdep update
 
 # setup colcon mixin and metadata
 RUN colcon mixin add default \

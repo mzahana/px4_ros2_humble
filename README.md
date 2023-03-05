@@ -16,3 +16,6 @@ make px4-dev-ros2-humble
 **NOTE**
 
 Source files and workspaces are saved inside a shared volume. The path to the shared volume inside the container is `/home/user/shared_volume`. The path to the shared volume in the host is `$HOME/px4_ros2_humble_shared_volume`
+
+# Install PX4
+It's recommended to have the PX4-Autopilot src and the ros 2 workspace inside the shared volume, so you don't loose them if the container is removed.

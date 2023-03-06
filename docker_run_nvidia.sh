@@ -31,7 +31,9 @@ if [ -z "$PX4_ROOT" ]; then
 fi
 echo "path to catkin_ws is defined at $CATKIN_WS" && echo
 
-DOCKER_REPO="mzahana/px4-dev-ros2-humble:latest"
+# DOCKER_REPO="mzahana/px4-dev-ros2-humble:latest"
+DOCKER_REPO="mzahana/px4-dev-simulation-ubuntu22"
+# DOCKER_REPO="osrf/ros:humble-desktop"
 CONTAINER_NAME="px4_ros2_humble"
 WORKSPACE_DIR=~/${CONTAINER_NAME}_shared_volume
 CMD=""
@@ -117,7 +119,7 @@ if [ "$(docker ps -aq -f name=${CONTAINER_NAME})" ]; then
         docker start ${CONTAINER_NAME}
     fi
 
-    docker exec -it ${CONTAINER_NAME} bash -c "${CMD}"
+    docker exec --user user -it ${CONTAINER_NAME} bash -c "${CMD}"
 
 else
 
@@ -149,16 +151,19 @@ else
     #-v /dev/video0:/dev/video0 \
     
     # --publish 14556:14556/udp \
+    # --env="QT_X11_NO_MITSHM=1" \
+        # --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+        # --volume="$XAUTH:$XAUTH" \
+        # -env="XAUTHORITY=$XAUTH" \
     docker run -it \
         --network host \
-        --env="DISPLAY=$DISPLAY" \
-        --env="QT_X11_NO_MITSHM=1" \
+        --env="DISPLAY=${DISPLAY}" \
+        -e NVIDIA_DRIVER_CAPABILITIES=all \
         -e LOCAL_USER_ID="$(id -u)" \
-        -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+        --volume="/tmp/.X11-unix:/tmp/.X11-unix" \
+        --volume="/etc/localtime:/etc/localtime:ro" \
         --volume="$WORKSPACE_DIR:/home/user/shared_volume:rw" \
-        --volume="/dev/input:/dev/input" \
-        --volume="$XAUTH:$XAUTH" \
-        -env="XAUTHORITY=$XAUTH" \
+        --volume="/dev:/dev" \
         --name=${CONTAINER_NAME} \
         --privileged \
         $DOCKER_OPTS \

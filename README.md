@@ -5,7 +5,7 @@ A Docker development environment for PX4 + ROS 2 Humble
 
 ```bash 
 cd px4_ros2_humble/docker
-make px4-dev-ros2-humble
+make px4-dev-simulation-ubuntu22
 ```
 
 This builds a Docker image that has the required PX4 development environment, and ROS 2 Humble Desktop. It does not container the PX4 source code or any ROS 2 workspaces. This is covered in the following sections.

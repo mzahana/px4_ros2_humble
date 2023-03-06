@@ -31,7 +31,8 @@ if [ -z "$PX4_ROOT" ]; then
 fi
 echo "path to catkin_ws is defined at $CATKIN_WS" && echo
 
-DOCKER_REPO="mzahana/px4-dev-ros2-humble:latest"
+# DOCKER_REPO="mzahana/px4-dev-simulation-ubuntu22"
+DOCKER_REPO="osrf/ros:humble-desktop-full"
 CONTAINER_NAME="px4_ros2_humble"
 WORKSPACE_DIR=~/${CONTAINER_NAME}_shared_volume
 CMD=""
@@ -84,6 +85,8 @@ echo "Starting Container: ${CONTAINER_NAME} with REPO: $DOCKER_REPO"
 #         export PX4_ROOT=$PX4_ROOT && \
 #         export OSQP_SRC=/root/shared_volume/src && /bin/bash"
 
+xhost +local:root
+
 CMD="export CATKIN_WS=$CATKIN_WS && \
         export PX4_ROOT=$PX4_ROOT && /bin/bash"
 
@@ -98,7 +101,7 @@ if [ "$(docker ps -aq -f name=${CONTAINER_NAME})" ]; then
         docker start ${CONTAINER_NAME}
     fi
 
-    docker exec -it ${CONTAINER_NAME} bash -c "${CMD}"
+    docker exec --user user -it ${CONTAINER_NAME} bash -c "${CMD}"
 
 else
 
@@ -134,6 +137,7 @@ else
         --env="DISPLAY=$DISPLAY" \
         --env="QT_X11_NO_MITSHM=1" \
         -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+        -v /dev/dri:/dev/dri\
         --volume="$WORKSPACE_DIR:/home/user/shared_volume:rw" \
         --volume="/dev/input:/dev/input" \
         --volume="$XAUTH:$XAUTH" \

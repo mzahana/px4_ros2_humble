@@ -27,7 +27,7 @@ RUN apt-get update  && apt-get upgrade -y\
 
 # install ros2 desktop
 RUN apt-get install --quiet --no-install-recommends -y \
-		ros-$ROS_DISTRO-desktop \
+		ros-$ROS_DISTRO-desktop-full \
 		ros-$ROS_DISTRO-launch-testing-ament-cmake \
 		ros-$ROS_DISTRO-ros2bag \
 		ros-$ROS_DISTRO-rosidl-generator-dds-idl \

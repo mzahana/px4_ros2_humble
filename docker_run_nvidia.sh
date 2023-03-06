@@ -147,17 +147,18 @@ else
 
     echo "Running container ${CONTAINER_NAME}..."
     #-v /dev/video0:/dev/video0 \
+    
+    # --publish 14556:14556/udp \
     docker run -it \
         --network host \
-        -e LOCAL_USER_ID="$(id -u)" \
         --env="DISPLAY=$DISPLAY" \
         --env="QT_X11_NO_MITSHM=1" \
-        -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+        -e LOCAL_USER_ID="$(id -u)" \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
         --volume="$WORKSPACE_DIR:/home/user/shared_volume:rw" \
         --volume="/dev/input:/dev/input" \
         --volume="$XAUTH:$XAUTH" \
         -env="XAUTHORITY=$XAUTH" \
-        --publish 14556:14556/udp \
         --name=${CONTAINER_NAME} \
         --privileged \
         $DOCKER_OPTS \

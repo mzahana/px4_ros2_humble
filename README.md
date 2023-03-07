@@ -1,7 +1,14 @@
 # px4_ros2_humble
 A Docker development environment for PX4 + ROS 2 Humble
+What is included in the Docker image is
+* Ubuntu 22.04 (jammy)
+* ROS 2 Humble
+* Gazebo Garden
+* Development tools required by PX4 firmware
 
 # Build Docker Image
+Docker should be installed before proceeding with the next steps
+You can follow [this link](https://docs.docker.com/engine/install/ubuntu/) for docker setup on Ubuntu
 
 ```bash 
 cd px4_ros2_humble/docker

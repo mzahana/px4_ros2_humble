@@ -44,7 +44,7 @@ It's recommended to have the `PX4-Autopilot` src and the ros 2 workspace(s) insi
     ```bash
     git clone https://github.com/PX4/PX4-Autopilot.git --recursive
     ```
-* Enter the `PX4-Autopilot` directory (inside the ), clean, and build the source code
+* Enter the `PX4-Autopilot` directory, clean and build the source code
     ```bash
     cd PX4-Autopilot
     make clean

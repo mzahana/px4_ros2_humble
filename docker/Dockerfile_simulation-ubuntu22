@@ -83,6 +83,8 @@ ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 RUN wget https://github.com/JSBSim-Team/jsbsim/releases/download/v1.1.13/JSBSim-devel_1.1.13-986.jammy.amd64.deb
 RUN dpkg -i JSBSim-devel_1.1.13-986.jammy.amd64.deb
 
+RUN echo "source /opt/ros/humble/setup.bash" >> /home/user/.bashrc
+
 # create and start as LOCAL_USER_ID
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

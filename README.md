@@ -10,10 +10,12 @@ What is included in the Docker image is
 Docker should be installed before proceeding with the next steps
 You can follow [this link](https://docs.docker.com/engine/install/ubuntu/) for docker setup on Ubuntu
 
-```bash 
-cd px4_ros2_humble/docker
-make px4-dev-simulation-ubuntu22
-```
+* Clone this package `git clone https://github.com/mzahana/px4_ros2_humble`
+* Build the docker image
+    ```bash 
+    cd px4_ros2_humble/docker
+    make px4-dev-simulation-ubuntu22
+    ```
 
 This builds a Docker image that has the required PX4 development environment, and ROS 2 Humble Desktop. It does not container the PX4 source code or any ROS 2 workspaces. This is covered in the following sections.
 

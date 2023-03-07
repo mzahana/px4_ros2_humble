@@ -49,8 +49,6 @@ It's recommended to have the `PX4-Autopilot` src and the ros 2 workspace(s) insi
     cd PX4-Autopilot
     make clean
     make distclean
-    git fetch origin release/1.13.2
-    git checkout release/1.13.2
     make submodulesclean
     ```
 * Test if PX4 can run  with the Gazebo simiulation 

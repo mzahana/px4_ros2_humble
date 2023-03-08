@@ -53,7 +53,7 @@ It's recommended to have the `PX4-Autopilot` src and the ros 2 workspace(s) insi
     ```
 * Test if PX4 can run  with the Gazebo simiulation 
     ```bash
-    make px4_sitl gazebo-classic
+    make px4_sitl gz_x500
     ```
     The XRCE-DDS client already runs with the above command
 * The XRCE-DDS Agent is already built with the Docker image. In a new terminal, run the XRCE-DDS Agent

@@ -65,3 +65,6 @@ It's recommended to have the `PX4-Autopilot` src and the ros 2 workspace(s) insi
 
 # Build & Run ROS 2 Wrokspace
 * You can build/run ROS 2 workspace as described [here](https://docs.px4.io/main/en/ros/ros2_comm.html#build-ros-2-workspace)
+
+# Examples
+* [Offboard control with PX4](https://github.com/Jaeyoung-Lim/px4-offboard)

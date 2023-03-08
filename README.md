@@ -70,3 +70,4 @@ It's recommended to have the `PX4-Autopilot` src and the ros 2 workspace(s) insi
 * [Offboard control with PX4](https://github.com/Jaeyoung-Lim/px4-offboard)
     * Use `MicroXRCEAgent udp4 -p 8888` instead of `micro-ros-agent udp4 --port 8888`
     * Use `make px4_sitl gz_x500` instead of `make px4_sitl gazebo`
+    * You will need to download and run QGroundControl (does not have to be inside the container). And then arm the vehicle and switch the flight mode to Offboard

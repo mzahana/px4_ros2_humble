@@ -33,12 +33,13 @@ Otherwise, run
 
 **NOTE**
 
-Source files and workspaces should be saved inside a shared volume. The path to the shared volume inside the container is `/home/user/shared_volume`. The path to the shared volume in the host is `$HOME/px4_ros2_humble_shared_volume`
+* Source files and workspaces should be saved inside a shared volume. The path to the shared volume inside the container is `/home/user/shared_volume`. The path to the shared volume in the host is `$HOME/px4_ros2_humble_shared_volume`.
+* When you login inside the container, the username is `user` and the passwrod is `user`. `user` is part of the `sudo` group and can install pckages using `sudo apt install`
 
 # Install PX4
 It's recommended to have the `PX4-Autopilot` src and the ros 2 workspace(s) inside the shared volume, so you don't lose them if the container is removed.
 
-* Enter the container `./docker_run.sh`
+* Enter the container `./docker_run_nvidia.sh`
 * Go to the shared volume `cd /home/user/shared_volume`
 * Clone the `PX4-Autopilot` source 
     ```bash

@@ -96,6 +96,33 @@ RUN apt install -y apt-transport-https && \
 
 RUN echo "source /opt/ros/humble/setup.bash" >> /home/user/.bashrc
 
+#
+# Remove binary pkg ros-humble-ros-gz-bridge. Not compatible with ros 2 humble. Need to build form source
+#
+RUN apt remove -y ros-humble-ros-gz-bridge
+
+#
+# Build ros-humble-ros-gz-bridge from source
+#
+USER user
+WORKDIR /home/user
+RUN rosdep update
+RUN mkdir -p /home/user/ros2_ws/src/
+RUN cd /home/user/ros2_ws/src/ && git clone -b ros2 https://github.com/gazebosim/ros_gz.git
+
+USER root
+RUN apt-get install gz-sim7-cli libgz-transport12-dev libgz-math7-dev libgz-cmake3-dev libignition-cmake2-dev -y
+WORKDIR /home/user/ros2_ws
+ENV GZ_VERSION=garden
+RUN rosdep install -r --from-paths src -i -y --rosdistro humble
+
+WORKDIR /home/ros2/ros_ws
+RUN bash -c "source /opt/ros/humble/setup.bash && cd /home/user/ros2_ws && colcon build"
+
+USER root
+RUN echo "source /home/user/ros2_ws/install/setup.bash" >> /home/user/.bashrc
+
+
 # create and start as LOCAL_USER_ID
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

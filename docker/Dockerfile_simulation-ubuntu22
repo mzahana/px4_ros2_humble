@@ -117,7 +117,7 @@ ENV GZ_VERSION=garden
 RUN rosdep install -r --from-paths src -i -y --rosdistro humble
 
 WORKDIR /home/ros2/ros_ws
-RUN bash -c "source /opt/ros/humble/setup.bash && cd /home/user/ros2_ws && colcon build"
+RUN bash -c "source /opt/ros/humble/setup.bash && cd /home/user/ros2_ws && export MAKEFLAGS='-j 4' &&  colcon build"
 
 USER root
 RUN echo "source /home/user/ros2_ws/install/setup.bash" >> /home/user/.bashrc
